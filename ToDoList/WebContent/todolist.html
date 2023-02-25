@@ -68,7 +68,20 @@
             </td>
           </tr>
         </tbody>
+
       </table>
+      <div class="row">
+        <div class="col">
+          <strong data-bind="visible: ToDoList.tasks().length > 0">
+            Total:
+            <span data-bind="text: ToDoList.tasks().length"></span>
+            Completed: <span data-bind="text: ToDoList.numOfCompletedTasks()"></span>
+          </strong>
+          <strong data-bind="visible: ToDoList.tasks().length == 0">
+            No tasks in my list
+          </strong>
+        </div>
+      </div>
     </main>
 
     <footer class="mt-auto text-white-50">
