@@ -10,7 +10,7 @@ var ToDoList = function () {
   const task = {
     name: ko.observable(),
     description: ko.observable(),
-    status: states.NEW,
+    priority: ko.observable(),
   };
 
   const tasks = ko.observableArray();
@@ -18,8 +18,10 @@ var ToDoList = function () {
   const addTask = function () {
     console.log(`adding task: name: ${task.name()}, description: ${task.description()}`);
     tasks.push({
-      name: task.name(), description: task.description(),
-      status: ko.observable(states.NEW)
+      name: task.name(),
+      description: task.description(),
+      priority: task.priority(),
+      status: ko.observable(states.NEW),
     });
     clearTask();
   };
@@ -38,6 +40,7 @@ var ToDoList = function () {
   const clearTask = function () {
     task.name(null);
     task.description(null);
+    task.priority('1');
   };
 
   const init = function () {
