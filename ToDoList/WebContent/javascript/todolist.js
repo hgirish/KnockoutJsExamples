@@ -58,7 +58,7 @@ var ToDoList = function () {
     console.log('Sorting task by name');
     tasks.sort(
       function (left, right) {
-        return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1);
+        return left.name.toLowerCase().localeCompare(right.name.toLowerCase());
       }
     );
   };
