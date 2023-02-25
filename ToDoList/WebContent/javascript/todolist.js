@@ -43,6 +43,26 @@ var ToDoList = function () {
     task.priority('1');
   };
 
+  const sortByPriority = function () {
+    console.log('Sorting task by priority');
+    tasks.sort(
+      function (left, right) {
+        return left.priorityy == right.priority ?
+          0 :
+          (left.priority < right.priority ? -1 : 1);
+      }
+    );
+  };
+
+  const sortByName = function () {
+    console.log('Sorting task by name');
+    tasks.sort(
+      function (left, right) {
+        return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1);
+      }
+    );
+  };
+
   const init = function () {
     /* add code to initialize this module */
     ko.applyBindings(ToDoList);
@@ -59,5 +79,7 @@ var ToDoList = function () {
     deleteTask: deleteTask,
     completeTask: completeTask,
     states: states,
+    sortByPriority: sortByPriority,
+    sortByName: sortByName,
   };
 }();

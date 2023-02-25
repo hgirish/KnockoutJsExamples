@@ -37,6 +37,16 @@
 
         </div>
       </div>
+      <div class="row" data-bind="if: ToDoList.tasks().length">
+        <div class="col">
+          Sort by
+          <div class="btn-group" role="group">
+            <button type="btn btn-default" data-bind="click: ToDoList.sortByPriority">Priority</button>
+            <button type="btn btn-default" data-bind="click: ToDoList.sortByName">Name</button>
+          </div>
+        </div>
+      </div>
+
       <table class="table table-dark" data-bind="if: ToDoList.tasks().length">
         <thead>
           <tr>
