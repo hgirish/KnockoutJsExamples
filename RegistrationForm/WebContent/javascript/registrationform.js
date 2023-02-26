@@ -5,6 +5,11 @@ let RegistrationForm = function () {
       firstName: ko.observable(),
       middleName: ko.observable(),
       lastName: ko.observable(),
+    },
+    contactDetails: {
+      phoneNumber: ko.observable(),
+      emailAddress: ko.observable(),
+      prererredContact: ko.observable(),
     }
 
   };

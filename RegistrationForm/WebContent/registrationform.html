@@ -83,6 +83,54 @@
 
 
             </fieldset>
+
+            <fieldset>
+              <div class="row mt-3">
+                <div class="col">
+                  <h4>Contact Details</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="phoneNumberInput">Phone Number</label>
+                    <input type="tel" class="form-control"
+                      data-bind="value: RegistrationForm.customer.contactDetails.phoneNumber" id="phoneNumberInput"
+                      placeholder="Enter phone number" />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="emailAddressInput">Email</label>
+                    <input type="email" class="form-control"
+                      data-bind="value: RegistrationForm.customer.contactDetails.emailAddress" id="emailAddressInput"
+                      placeholder="Enter email address" />
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="form-group">
+                    <label>Preferred Contact</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="phone" name="preferredContactInput"
+                      id="inlineRadio1" data-bind="checked: RegistrationForm.customer.contactDetails.preferredContact">
+                    <label class="form-check-label" for="inlineRadio1">Phone</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="email" name="preferredContactInput"
+                      id="inlineRadio2" data-bind="checked: RegistrationForm.customer.contactDetails.preferredContact">
+                    <label class="form-check-label" for="inlineRadio2">Email</label>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row mt-3">
+
+              </div>
+            </fieldset>
+
             <div class="row text-center pt-5">
               <div class="col">
                 <button type="submit" class="btn btn-primary">Submit</button>
