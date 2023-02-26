@@ -10,6 +10,29 @@ let RegistrationForm = function () {
       phoneNumber: ko.observable(),
       emailAddress: ko.observable(),
       prererredContact: ko.observable(),
+    },
+    address: {
+      residential: {
+        street: ko.observable(),
+        city: ko.observable(),
+        postCode: ko.observable(),
+        country: ko.observable(),
+      },
+      postal: {
+        type: ko.observable(),
+        streetAddress: {
+          street: ko.observable(),
+          city: ko.observable(),
+          postCode: ko.observable(),
+          country: ko.observable(),
+        },
+        poBoxAddress: {
+          poBox: ko.observable(),
+          city: ko.observable(),
+          postCode: ko.observable(),
+          country: ko.observable(),
+        }
+      }
     }
 
   };
