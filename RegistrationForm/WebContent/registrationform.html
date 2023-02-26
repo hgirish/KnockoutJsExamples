@@ -292,6 +292,56 @@
 
             </fieldset>
 
+            <fieldset>
+              <div class="row">
+                <div class="col">
+                  <h4>Credit Cards</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div data-bind="foreach: RegistrationForm.customer.creditCards">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="ccNameInput">Name on card</label>
+                        <input type="text" class="form-control" data-bind="value: name" id="ccNameInput"
+                          placeholder="Enter name on card" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="ccNumberInput">Card number</label>
+                        <input type="text" class="form-control" data-bind="value: number" id="ccNumberInput"
+                          placeholder="Enter card number" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="ccInpuExpiry">Card expiry date</label>
+                        <input type="text" class="form-control" data-bind="value: expiryDate" id="ccInpuExpiry"
+                          placeholder="mm/yy" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-1" data-bind="visible: RegistrationForm.customer.creditCards().length > 1">
+                      <div class="form-group">
+                        <label for="ccActionInput">Action</label>
+                        <a href="" id="ccActionInput" data-bind="click: RegistrationForm.deleteCreditCard">Delete</a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="row" data-bind="visible: RegistrationForm.customer.creditCards().length < 3">
+                  <a href="" class="btn btn-dark" data-bind="click: RegistrationForm.addCreditCard">+ credit
+                    card</a>
+                </div>
+
+              </div>
+            </fieldset>
+
             <div class="row text-center pt-5">
               <div class="col">
                 <button type="submit" class="btn btn-primary">Submit</button>

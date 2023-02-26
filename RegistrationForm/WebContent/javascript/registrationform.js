@@ -33,7 +33,8 @@ let RegistrationForm = function () {
           country: ko.observable(),
         }
       }
-    }
+    },
+    creditCards: ko.observableArray(),
 
   };
 
@@ -72,7 +73,22 @@ let RegistrationForm = function () {
     }
   });
 
+  let addCreditCard = function () {
+    customer.creditCards.push({
+      name: ko.observable(),
+      number: ko.observable(),
+      expiryDate: ko.observable(),
+    });
+  };
+
+  let deleteCreditCard = function (card) {
+    console.log(`Deleting credit card with number: ${card.number()}`);
+    customer.creditCards.remove(card);
+  };
+
   let init = function () {
+    addCreditCard();
+
     ko.applyBindings(RegistrationForm);
   };
 
@@ -87,5 +103,7 @@ let RegistrationForm = function () {
     titleOptions: titleOptions,
     titleSelect: titleSelect,
     submit: submit,
+    addCreditCard: addCreditCard,
+    deleteCreditCard: deleteCreditCard,
   };
 }();
