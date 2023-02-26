@@ -1,5 +1,5 @@
-let RegistrationForm = function () {
-  let customer = {
+const RegistrationForm = function () {
+  const customer = {
     personalInfo: {
       title: ko.observable(),
       firstName: ko.observable(),
@@ -35,10 +35,11 @@ let RegistrationForm = function () {
       }
     },
     creditCards: ko.observableArray(),
+    interests: ko.observableArray(),
 
   };
 
-  let titleOptions = [
+  const titleOptions = [
     {
       value: 'Mr',
       setTitle: function () {
@@ -65,7 +66,7 @@ let RegistrationForm = function () {
     },
   ];
 
-  let titleSelect = ko.pureComputed(function () {
+  const titleSelect = ko.pureComputed(function () {
     if (customer.personalInfo.title() == null) {
       return 'Select';
     } else {
@@ -73,7 +74,7 @@ let RegistrationForm = function () {
     }
   });
 
-  let addCreditCard = function () {
+  const addCreditCard = function () {
     customer.creditCards.push({
       name: ko.observable(),
       number: ko.observable(),
@@ -81,12 +82,32 @@ let RegistrationForm = function () {
     });
   };
 
-  let deleteCreditCard = function (card) {
+  const deleteCreditCard = function (card) {
     console.log(`Deleting credit card with number: ${card.number()}`);
     customer.creditCards.remove(card);
   };
 
-  let init = function () {
+  const clear = function () {
+    console.log('Clear customer model');
+    traverseAndClearModel(customer);
+
+    addCreditCard();
+
+  };
+  const traverseAndClearModel = function (jsonObj) {
+    $.each(jsonObj, function (key, val) {
+      if (ko.isObservable(val)) {
+        if (val.removeAll != undefined) {
+          val.removeAll();
+        } else {
+          val(null);
+        }
+      } else {
+        traverseAndClearModel(val);
+      }
+    });
+  };
+  const init = function () {
     addCreditCard();
 
     ko.applyBindings(RegistrationForm);
@@ -94,7 +115,7 @@ let RegistrationForm = function () {
 
   $(init);
 
-  let submit = function () {
+  const submit = function () {
     console.log(ko.toJSON(customer));
   };
 
@@ -105,5 +126,6 @@ let RegistrationForm = function () {
     submit: submit,
     addCreditCard: addCreditCard,
     deleteCreditCard: deleteCreditCard,
+    clear: clear
   };
 }();
