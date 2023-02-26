@@ -25,7 +25,7 @@ module.exports = {
             "error",
             "always"
         ],
-        "prefer-const": 2
+        "no-var": "error"
 
     },
     "globals": {

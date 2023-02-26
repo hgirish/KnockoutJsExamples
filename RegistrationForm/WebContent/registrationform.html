@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" class="h-100" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Knockout : Registration Form Example</title>
+
+  <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
+  <!-- Custom styles for this template -->
+  <link href="css/cover.css" rel="stylesheet">
+</head>
+
+<body class="d-flex h-100  text-bg-dark">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mx-2">
+      <div>
+        <h3 class="float-md-start mb-0">Registration Form</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="px-3 pt-5">
+      <div class="row">
+        <div class="col">
+          <form data-bind="submit: RegistrationForm.submit">
+            <fieldset>
+              <div class="row">
+                <div class="col">
+                  <h4>Personal Information</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-2">
+                  <div class="form-group">
+                    <label for="titleInput">Title</label>
+                    <div class="dropdown">
+                      <button class="btn btn-dark dropdown-toggle" type="button" id="titleInput"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span data-bind="text: RegistrationForm.titleSelect"> <span class="caret"></span>
+                      </button>
+                      <div class="dropdown-menu" data-bind="foreach: RegistrationForm.titleOptions"
+                        aria-labelledby="titleInput" role="menu">
+                        <a class="dropdown-item" data-bind="text: value, click:setTitle"></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="firstNameInput">First Name</label>
+                    <input type="text" class="form-control"
+                      data-bind="value: RegistrationForm.customer.personalInfo.firstName" id="firstNameInput"
+                      placeholder="Enter first name" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="middleNameInput">Middle Name</label>
+                    <input type="text" class="form-control"
+                      data-bind="value: RegistrationForm.customer.personalInfo.middleName" id="middleNameInput"
+                      placeholder="Enter Middle name" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="lastNameInput">Last Name</label>
+                    <input type="text" class="form-control"
+                      data-bind="value: RegistrationForm.customer.personalInfo.lastName" id="lastNameInput"
+                      placeholder="Enter Last name" />
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+
+
+
+            </fieldset>
+            <div class="row text-center pt-5">
+              <div class="col">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="mt-auto text-white-50">
+      <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
+          href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+    </footer>
+  </div>
+
+  <script type="text/javascript" src="../../lib/jquery/jquery.js"></script>
+  <script type="text/javascript" src="../../lib/knockout/knockout-latest.js"></script>
+  <script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.bundle.js"></script>
+  <script type="text/javascript" src="javascript/registrationform.js"></script>
+
+
+
+</body>
+
+</html>
