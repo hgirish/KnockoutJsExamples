@@ -1,8 +1,22 @@
+ko.extenders.required = function (target, option) {
+  target.hasError = ko.observable(false);
+
+  target.subscribe(function (newValue) {
+    console.log(`ko.extenders.required: newValue: ${newValue}`)
+    target.hasError(newValue ? false : true)
+  })
+
+  return target;
+}
+
 const RegistrationForm = function () {
+
+
+
   const customer = {
     personalInfo: {
       title: ko.observable(),
-      firstName: ko.observable(),
+      firstName: ko.observable().extend({ required: null }),
       middleName: ko.observable(),
       lastName: ko.observable(),
     },
@@ -118,6 +132,8 @@ const RegistrationForm = function () {
   const submit = function () {
     console.log(ko.toJSON(customer));
   };
+
+
 
   return {
     customer: customer,
