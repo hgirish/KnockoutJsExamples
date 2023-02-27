@@ -79,11 +79,15 @@ const RegistrationForm = function () {
   });
 
   const addCreditCard = function () {
-    customer.creditCards.push({
-      name: ko.observable(),
-      number: ko.observable(),
-      expiryDate: ko.observable(),
-    });
+    const card = {
+      name: ko.observable().extend({ required: true }),
+      number: ko.observable().extend({ required: true, number: true }),
+      expiryDate: ko.observable().extend(
+        { required: true, pattern: '^(0[1-9]|1[012])/\\d\\d$' }),
+    };
+    card.errors = ko.validation.group(card);
+
+    customer.creditCards.push(card);
   };
 
   const deleteCreditCard = function (card) {
@@ -134,12 +138,14 @@ const RegistrationForm = function () {
   $(init);
 
   const submit = function () {
+    const creditCardValid = checkCreditCardsForErrors();
+    const staticFieldValid = checkStaticFieldsForErrors();
+
     console.log(ko.toJSON(customer));
-    if (customer.errors().length === 0) {
+    if (creditCardValid && staticFieldValid) {
       console.log('Customer model is valid');
     } else {
       console.log('Customer model has erros');
-      customer.errors.showAllMessages();
     }
   };
   const isStreetAddress = function () {
@@ -162,7 +168,24 @@ const RegistrationForm = function () {
 
   };
 
+  const checkCreditCardsForErrors = function () {
+    let valid = true;
+    ko.utils.arrayForEach(customer.creditCards(), function (card) {
+      if (card.errors().length > 0) {
+        valid = false;
+        card.errors.showAllMessages();
+      }
+    });
+    return valid;
+  };
 
+  const checkStaticFieldsForErrors = function () {
+    if (customer.errors().length > 0) {
+      customer.errors.showAllMessages();
+      return false;
+    }
+    return true;
+  };
 
   return {
     customer: customer,

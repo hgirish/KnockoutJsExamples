@@ -351,8 +351,8 @@
                       <div class="form-group">
                         <label for="ccNameInput">Name on card</label>
                         <input type="text" class="form-control"
-                          data-bind="value: name" id="ccNameInput"
-                          placeholder="Enter name on card" />
+                          data-bind="value: name, validationElement: name"
+                          id="ccNameInput" placeholder="Enter name on card" />
                       </div>
                     </div>
 
@@ -360,8 +360,8 @@
                       <div class="form-group">
                         <label for="ccNumberInput">Card number</label>
                         <input type="text" class="form-control"
-                          data-bind="value: number" id="ccNumberInput"
-                          placeholder="Enter card number" />
+                          data-bind="value: number, validationElement: number"
+                          id="ccNumberInput" placeholder="Enter card number" />
                       </div>
                     </div>
 
@@ -369,8 +369,8 @@
                       <div class="form-group">
                         <label for="ccInpuExpiry">Card expiry date</label>
                         <input type="text" class="form-control"
-                          data-bind="value: expiryDate" id="ccInpuExpiry"
-                          placeholder="mm/yy" />
+                          data-bind="value: expiryDate, validationElement: expiryDate"
+                          id="ccInpuExpiry" placeholder="mm/yy" />
                       </div>
                     </div>
 
