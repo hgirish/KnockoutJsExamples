@@ -103,7 +103,7 @@
                   <div class="form-group">
                     <label for="phoneNumberInput">Phone Number</label>
                     <input type="tel" class="form-control"
-                      data-bind="value: RegistrationForm.customer.contactDetails.phoneNumber" id="phoneNumberInput"
+                      data-bind="value: RegistrationForm.customer.contactDetails.phoneNumber,validationElement: RegistrationForm.customer.contactDetails.phoneNumber" id="phoneNumberInput"
                       placeholder="Enter phone number" />
                   </div>
                 </div>
@@ -111,13 +111,14 @@
                   <div class="form-group">
                     <label for="emailAddressInput">Email</label>
                     <input type="email" class="form-control"
-                      data-bind="value: RegistrationForm.customer.contactDetails.emailAddress" id="emailAddressInput"
+                      data-bind="value: RegistrationForm.customer.contactDetails.emailAddress,validationElement: RegistrationForm.customer.contactDetails.emailAddress" id="emailAddressInput"
                       placeholder="Enter email address" />
                   </div>
                 </div>
 
                 <div class="col">
-                  <div class="form-group">
+                  <div class="form-group" 
+                  data-bind="validationElement: RegistrationForm.customer.contactDetails.preferredContact, validationOptions:{insertMessages:false}">
                     <label>Preferred Contact</label>
                   </div>
 
@@ -131,6 +132,7 @@
                       id="inlineRadio2" data-bind="checked: RegistrationForm.customer.contactDetails.preferredContact">
                     <label class="form-check-label" for="inlineRadio2">Email</label>
                   </div>
+                  <span class="invalid-feedback" data-bind="validationMessage: RegistrationForm.customer.contactDetails.preferredContact"></span>
 
                 </div>
               </div>

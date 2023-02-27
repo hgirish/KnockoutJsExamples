@@ -11,9 +11,9 @@ const RegistrationForm = function () {
       lastName: ko.observable().extend({ required: true }),
     },
     contactDetails: {
-      phoneNumber: ko.observable(),
-      emailAddress: ko.observable(),
-      prererredContact: ko.observable(),
+      phoneNumber: ko.observable().extend({required:true, minLength:4, maxLength:9, number:true}),
+      emailAddress: ko.observable().extend({required: true, email:true}),
+      preferredContact: ko.observable().extend({ required: true }),
     },
     address: {
       residential: {
