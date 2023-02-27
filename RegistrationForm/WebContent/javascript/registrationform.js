@@ -5,35 +5,35 @@ const RegistrationForm = function () {
 
   const customer = {
     personalInfo: {
-      title: ko.observable().extend({required:true}),
+      title: ko.observable().extend({ required: true }),
       firstName: ko.observable().extend({ required: true }),
       middleName: ko.observable(),
       lastName: ko.observable().extend({ required: true }),
     },
     contactDetails: {
-      phoneNumber: ko.observable().extend({required:true, minLength:4, maxLength:9, number:true}),
-      emailAddress: ko.observable().extend({required: true, email:true}),
+      phoneNumber: ko.observable().extend({ required: true, minLength: 4, maxLength: 9, number: true }),
+      emailAddress: ko.observable().extend({ required: true, email: true }),
       preferredContact: ko.observable().extend({ required: true }),
     },
     address: {
       residential: {
-        street: ko.observable(),
-        city: ko.observable(),
-        postCode: ko.observable(),
-        country: ko.observable(),
+        street: ko.observable().extend({ required: true }),
+        city: ko.observable().extend({ required: true }),
+        postCode: ko.observable().extend({ required: true, maxLength: 4, number: true }),
+        country: ko.observable().extend({ required: true }),
       },
       postal: {
-        type: ko.observable(),
+        type: ko.observable().extend({ required: true }),
         streetAddress: {
           street: ko.observable(),
           city: ko.observable(),
-          postCode: ko.observable(),
+          postCode: ko.observable().extend({ maxLength: 4, number: true }),
           country: ko.observable(),
         },
         poBoxAddress: {
           poBox: ko.observable(),
           city: ko.observable(),
-          postCode: ko.observable(),
+          postCode: ko.observable().extend({ maxLength: 4, number: true }),
           country: ko.observable(),
         }
       }
@@ -118,12 +118,14 @@ const RegistrationForm = function () {
       errorMessageClass: 'invalid-feedback'
     });
 
+    applyConditionalValidation();
+
     customer.errors = ko.validation.group(customer, { deep: true });
   };
 
   const init = function () {
     configureValidation();
-    
+
     addCreditCard();
 
     ko.applyBindings(RegistrationForm);
@@ -139,6 +141,25 @@ const RegistrationForm = function () {
       console.log('Customer model has erros');
       customer.errors.showAllMessages();
     }
+  };
+  const isStreetAddress = function () {
+    return customer.address.postal.type() == 'street';
+  };
+  const isPoBoxAddress = function () {
+    return customer.address.postal.type() == 'pobox';
+  };
+
+  const applyConditionalValidation = function () {
+    customer.address.postal.streetAddress.street.extend({ required: { onlyIf: isStreetAddress } });
+    customer.address.postal.streetAddress.city.extend({ required: { onlyIf: isStreetAddress } });
+    customer.address.postal.streetAddress.postCode.extend({ required: { onlyIf: isStreetAddress } });
+    customer.address.postal.streetAddress.country.extend({ required: { onlyIf: isStreetAddress } });
+
+    customer.address.postal.poBoxAddress.poBox.extend({ required: { onlyIf: isPoBoxAddress } });
+    customer.address.postal.poBoxAddress.city.extend({ required: { onlyIf: isPoBoxAddress } });
+    customer.address.postal.poBoxAddress.postCode.extend({ required: { onlyIf: isPoBoxAddress } });
+    customer.address.postal.poBoxAddress.country.extend({ required: { onlyIf: isPoBoxAddress } });
+
   };
 
 
