@@ -5,7 +5,7 @@ const RegistrationForm = function () {
 
   const customer = {
     personalInfo: {
-      title: ko.observable(),
+      title: ko.observable().extend({required:true}),
       firstName: ko.observable().extend({ required: true }),
       middleName: ko.observable(),
       lastName: ko.observable().extend({ required: true }),

@@ -35,13 +35,18 @@
               </div>
               <div class="row">
                 <div class="col-2">
-                  <div class="form-group">
+                  <div class="form-group"
+                  data-bind="validationElement: RegistrationForm.customer.personalInfo.title">
                     <label for="titleInput">Title</label>
                     <div class="dropdown">
-                      <button class="btn btn-dark dropdown-toggle" type="button" id="titleInput"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span data-bind="text: RegistrationForm.titleSelect">
-                          <span class="caret"></span>
+                      <button class="btn btn-dark dropdown-toggle form-control" type="button" id="titleInput"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        data-bind="validationElement: RegistrationForm.customer.personalInfo.title">
+                        <div class="float-start">
+                           <span data-bind="text: RegistrationForm.titleSelect">
+                          <span  class="caret"></span>
+                        </div>
+                       
                       </button>
                       <div class="dropdown-menu" data-bind="foreach: RegistrationForm.titleOptions"
                         aria-labelledby="titleInput" role="menu">
@@ -49,6 +54,7 @@
                       </div>
                     </div>
                   </div>
+                  <span class="invalid-feedback" data-bind="validationMessage: RegistrationForm.customer.personalInfo.title"></span>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
