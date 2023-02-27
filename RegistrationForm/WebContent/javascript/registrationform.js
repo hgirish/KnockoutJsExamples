@@ -1,13 +1,3 @@
-ko.extenders.required = function (target, option) {
-  target.hasError = ko.observable(false);
-
-  target.subscribe(function (newValue) {
-    console.log(`ko.extenders.required: newValue: ${newValue}`)
-    target.hasError(newValue ? false : true)
-  })
-
-  return target;
-}
 
 const RegistrationForm = function () {
 
@@ -16,9 +6,9 @@ const RegistrationForm = function () {
   const customer = {
     personalInfo: {
       title: ko.observable(),
-      firstName: ko.observable().extend({ required: null }),
+      firstName: ko.observable().extend({ required: true }),
       middleName: ko.observable(),
-      lastName: ko.observable(),
+      lastName: ko.observable().extend({ required: true }),
     },
     contactDetails: {
       phoneNumber: ko.observable(),
@@ -121,7 +111,19 @@ const RegistrationForm = function () {
       }
     });
   };
+
+  const configureValidation = function () {
+    ko.validation.init({
+      errorElementClass: 'is-invalid',
+      errorMessageClass: 'invalid-feedback'
+    });
+
+    customer.errors = ko.validation.group(customer, { deep: true });
+  };
+
   const init = function () {
+    configureValidation();
+    
     addCreditCard();
 
     ko.applyBindings(RegistrationForm);
@@ -131,6 +133,12 @@ const RegistrationForm = function () {
 
   const submit = function () {
     console.log(ko.toJSON(customer));
+    if (customer.errors().length === 0) {
+      console.log('Customer model is valid');
+    } else {
+      console.log('Customer model has erros');
+      customer.errors.showAllMessages();
+    }
   };
 
 

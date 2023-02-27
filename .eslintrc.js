@@ -29,6 +29,7 @@ module.exports = {
         "prefer-const" : "error"
 
     },
+    ignorePatterns: ['src/test/*', 'lib/**'], // <<< ignore all files in test folder
     "globals": {
     "$": true,
         "ko": true

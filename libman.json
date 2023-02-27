@@ -13,6 +13,10 @@
     {
       "library": "bootstrap@5.2.3",
       "destination": "lib/bootstrap"
+    },
+    {
+      "library": "knockout-validation@2.0.4",
+      "destination": "lib/knockout-validation"
     }
   ]
 }
