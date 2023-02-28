@@ -3,6 +3,7 @@ const BankPortal = function () {
 
   /* the model */
   const member = {
+    accounts: ko.observableArray(),
 
   };
 
@@ -28,6 +29,18 @@ const BankPortal = function () {
     return activeTab() === tab;
   };
 
+  const server = ServerStub();
+
+  const retrieveData = function () {
+    console.log('Retrieving data from server....');
+    const data = server.getMemberData();
+    console.log('Data retrieved from server: ' + ko.toJSON(data));
+
+    data.accounts.forEach(function (account) {
+      member.accounts.push({ summary: account.summary });
+    });
+  };
+
 
 
 
@@ -38,6 +51,7 @@ const BankPortal = function () {
   /* method to initialize the module */
   const init = function () {
     /* add code to initialize this module */
+    retrieveData();
 
     /* apply ko bindings */
     ko.applyBindings(BankPortal);
