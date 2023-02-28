@@ -29,10 +29,28 @@
       </div>
     </header>
 
-    <main class="px-3 pt-5">
+    <main class="px-3 pt-5" data-bs-theme="dark">
 
       <div id="Home" data-bind="visible: BankPortal.isActivePage('Home')">
-        Home Content
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#"
+              data-bind="click: BankPortal.setActiveTab.bind($data, 'Accounts'), css: {active: isActiveTab('Accounts')}">Accounts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              data-bind="click: BankPortal.setActiveTab.bind($data, 'Personal'), css: {active: isActiveTab('Personal')}">Personal</a>
+          </li>
+
+        </ul>
+        <div id="accounts"
+          data-bind="visible: BankPortal.isActiveTab('Accounts')">
+          Accounts page
+        </div>
+        <div id="personal"
+          data-bind="visible: BankPortal.isActiveTab('Personal')">
+          Personal page
+        </div>
       </div>
 
       <div id="About" data-bind="visible: BankPortal.isActivePage('About')">

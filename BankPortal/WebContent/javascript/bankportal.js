@@ -17,6 +17,17 @@ const BankPortal = function () {
     return activePage() === page;
   };
 
+  const activeTab = ko.observable('Accounts');
+
+  const setActiveTab = function (tab) {
+    console.log('Setting active tab to: ' + tab);
+    activeTab(tab);
+  };
+
+  const isActiveTab = function (tab) {
+    return activeTab() === tab;
+  };
+
 
 
 
@@ -41,6 +52,8 @@ const BankPortal = function () {
     member: member,
     setActivePage: setActivePage,
     isActivePage: isActivePage,
+    setActiveTab: setActiveTab,
+    isActiveTab: isActiveTab,
   };
 
 
