@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
   <!-- Custom styles for this template -->
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/carousel.css" rel="stylesheet">
 </head>
 
 <body class="d-flex h-100  text-bg-dark">
@@ -54,11 +55,104 @@
       </div>
 
       <div id="About" data-bind="visible: BankPortal.isActivePage('About')">
-        About Content
+        <div id="myBankCarousel" class="carousel slide" data-bs-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-bs-target="#myBankCarousel" data-bs-slide-to="0"
+              class="active">
+            </li>
+            <li data-bs-target="#myBankCarousel" data-bs-slide-to="1" class="">
+            </li>
+            <li data-bs-target="#myBankCarousel" data-bs-slide-to="2" class="">
+            </li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Open an account online in minutes</h1>
+                  <p>No need to visit a branch! No more waiting in queues!</p>
+                  <p>
+                    <a class="btn btn-default" href="#" role="button">Sign up
+                      today</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Lost your card?</h1>
+                  <p>Report your lost card online and we will send you a new
+                    one! </p>
+                  <p>
+                    <a class="btn btn-default" href="#" role="button">Learn
+                      more</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Make a donation</h1>
+                  <p>Make a donation online through us to your favourite
+                    charity. </p>
+                  <p>
+                    <a class="btn btn-default" href="#" role="button">Donate</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="left carousel-control carousel-control-prev"
+            href="#myBankCarousel" role="button"
+            data-bs-target="#myBankCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-primary"
+              aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </a>
+          <a class="right carousel-control carousel-control-next"
+            href="#myBankCarousel" role="button"
+            data-bs-target="#myBankCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-primary"
+              aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </a>
+        </div>
       </div>
 
       <div id="Contact" data-bind="visible: BankPortal.isActivePage('Contact')">
-        Contact Content
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card bg-dark border-light">
+
+              <div class="card-body">
+                <h5 class="card-title">General enquiries</h5>
+                <div class="card-text">
+                  <p>Call us: 111 1111 </br> 24 hours a day</p>
+                  <p>Calling from overseas? </br> Call us: +000111 111111
+                    </br> 24 hours a day</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card bg-dark border-light">
+
+              <div class="card-body">
+                <h5 class="card-title">Lost or damaged card</h5>
+                <div class="card-text">
+                  <p>Call us: 111 1111 </br> 24 hours a day</p>
+                  <p>Calling from overseas? </br> Call us: +000111 111111
+                    </br> 24 hours a day</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </main>
