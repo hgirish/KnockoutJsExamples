@@ -1,6 +1,5 @@
-
 /* Modue for ToDo List application */
-var ToDoList = function () {
+const ToDoList = function () {
   const states = {
     NEW: 'new',
     COMPLETE: 'complete'
@@ -75,6 +74,7 @@ var ToDoList = function () {
     /* add code to initialize this module */
     ko.applyBindings(ToDoList);
   };
+
 
   /* execute the init function when the DOM is ready */
   $(init);
