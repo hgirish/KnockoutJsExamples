@@ -46,7 +46,39 @@
         </ul>
         <div id="accounts"
           data-bind="visible: BankPortal.isActiveTab('Accounts')">
-          Accounts page
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title">
+                    <h4>Summary</h4>
+                  </div>
+                  <div class="card-text">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Branch</th>
+                          <th>Number</th>
+                          <th>Type</th>
+                          <th>Balance</th>
+                        </tr>
+                      </thead>
+                      <tbody data-bind="foreach: BankPortal.member.accounts">
+                        <tr>
+                          <td data-bind="text: ($index() + 1)"></td>
+                          <td data-bind="text: summary.branch"></td>
+                          <td data-bind="text: summary.number"></td>
+                          <td data-bind="text: summary.type"></td>
+                          <td data-bind="currency: summary.balance"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="personal"
           data-bind="visible: BankPortal.isActiveTab('Personal')">
@@ -172,6 +204,7 @@
     src="../../lib/knockout-validation/knockout.validation.js"></script>
   <script type="text/javascript"
     src="../../lib/bootstrap/js/bootstrap.bundle.js"></script>
+  <script type="text/javascript" src="javascript/configureknockout.js"></script>
   <script type="text/javascript" src="javascript/serverstub.js"></script>
   <script type="text/javascript" src="javascript/bankportal.js"></script>
 
