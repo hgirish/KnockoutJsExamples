@@ -3,6 +3,20 @@ const BankPortal = function () {
 
   /* the model */
   const member = {
+    personal: {
+      firstName: ko.observable(),
+      lastName: ko.observable(),
+      address: {
+        street: ko.observable(),
+        city: ko.observable(),
+        postCode: ko.observable(),
+        country: ko.observable()
+      },
+      contactDetails: {
+        phoneNumber: ko.observable(),
+        emailAddress: ko.observable()
+      }
+    },
     accounts: ko.observableArray(),
     selectedAccount: ko.observable(),
     selectedAccountTransactions: ko.observableArray([]),
@@ -35,8 +49,8 @@ const BankPortal = function () {
 
   const retrieveData = function () {
     console.log('Retrieving data from server....');
-    const data = server.getMemberData();
-    //console.log('Data retrieved from server: ' + ko.toJSON(data));
+    const data = server.getMemberData().data;
+    console.log('Data retrieved from server: ' + ko.toJSON(data));
 
     data.accounts.forEach(function (account) {
       member.accounts.push({
@@ -44,6 +58,17 @@ const BankPortal = function () {
         transactions: ko.observableArray(account.transactions)
       });
     });
+
+    member.personal.firstName(data.personal.firstName);
+    member.personal.lastName(data.personal.lastName);
+    member.personal.contactDetails.phoneNumber(data.personal.contactDetails.phoneNumber);
+    member.personal.contactDetails.emailAddress(data.personal.contactDetails.emailAddress);
+
+    member.personal.address.street(data.personal.address.street);
+    member.personal.address.city(data.personal.address.city);
+    member.personal.address.postCode(data.personal.address.postCode);
+    member.personal.address.country(data.personal.address.country);
+
   };
 
   const setSelectedAccount = function (account) {
