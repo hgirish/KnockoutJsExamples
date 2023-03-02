@@ -2,16 +2,16 @@ const ServerStub = function () {
   /* add members here */
 
   /* the model */
-  const accounts = [
-    {
-      summary: {
-        name: 'Los Angeles',
-        number: 12345,
-        accountType: 'Checking',
-        accountBalance: 1000.00
-      }
-    }
-  ];
+  // const accounts = [
+  //   {
+  //     summary: {
+  //       name: 'Los Angeles',
+  //       number: 12345,
+  //       accountType: 'Checking',
+  //       accountBalance: 1000.00
+  //     }
+  //   }
+  // ];
 
   const data = {
     personal: {
@@ -26,6 +26,15 @@ const ServerStub = function () {
         emailAddress: 'john.citizen@email.com'
       },
       accounts: [
+        {
+          summary: {
+            branch: 'Los Angeles',
+            number: 12345,
+            type: 'Checking',
+            balance: 1000.00
+          },
+          transactions: []
+        },
         {
           summary: {
             branch: 'Collingwood',

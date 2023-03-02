@@ -4,6 +4,8 @@ const BankPortal = function () {
   /* the model */
   const member = {
     accounts: ko.observableArray(),
+    selectedAccount: ko.observable(),
+    selectedAccountTransactions: ko.observableArray([]),
 
   };
 
@@ -34,13 +36,25 @@ const BankPortal = function () {
   const retrieveData = function () {
     console.log('Retrieving data from server....');
     const data = server.getMemberData();
-    console.log('Data retrieved from server: ' + ko.toJSON(data));
+    //console.log('Data retrieved from server: ' + ko.toJSON(data));
 
     data.accounts.forEach(function (account) {
-      member.accounts.push({ summary: account.summary });
+      member.accounts.push({
+        summary: account.summary,
+        transactions: ko.observableArray(account.transactions)
+      });
     });
   };
 
+  const setSelectedAccount = function (account) {
+    console.log(`Setting selected account: ${account.summary.number}`);
+    member.selectedAccount(account);
+    member.selectedAccountTransactions(account.transactions());
+  };
+
+  const isSelectedAccount = function (account) {
+    return account === member.selectedAccount();
+  };
 
 
 
@@ -68,6 +82,8 @@ const BankPortal = function () {
     isActivePage: isActivePage,
     setActiveTab: setActiveTab,
     isActiveTab: isActiveTab,
+    setSelectedAccount: setSelectedAccount,
+    isSelectedAccount: isSelectedAccount,
   };
 
 

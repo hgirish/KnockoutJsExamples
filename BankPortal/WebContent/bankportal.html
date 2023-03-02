@@ -48,13 +48,13 @@
           data-bind="visible: BankPortal.isActiveTab('Accounts')">
           <div class="row">
             <div class="col">
-              <div class="card">
+              <div class="card bg-dark">
                 <div class="card-body">
                   <div class="card-title">
                     <h4>Summary</h4>
                   </div>
                   <div class="card-text">
-                    <table class="table table-hover">
+                    <table class="table table-dark table-hover">
                       <thead>
                         <tr>
                           <th>#</th>
@@ -65,12 +65,55 @@
                         </tr>
                       </thead>
                       <tbody data-bind="foreach: BankPortal.member.accounts">
-                        <tr>
+                        <tr
+                          data-bind="click: BankPortal.setSelectedAccount,  css: {'table-active': BankPortal.isSelectedAccount($data)}">
                           <td data-bind="text: ($index() + 1)"></td>
                           <td data-bind="text: summary.branch"></td>
                           <td data-bind="text: summary.number"></td>
                           <td data-bind="text: summary.type"></td>
                           <td data-bind="currency: summary.balance"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card bg-dark">
+                <div class="card-body">
+                  <div class="card-title">
+                    <h4>Transactions</h4>
+                  </div>
+                  <div class="card-text">
+                    <p data-bind="ifnot: BankPortal.member.selectedAccount">
+                      Select an accont to view transactions.
+                    </p>
+                    <p
+                      data-bind="if: (BankPortal.member.selectedAccount() && BankPortal.member.selectedAccountTransactions().length == 0)">
+                      No transactions exists for this account.
+                    </p>
+                    <table class="table table-dark"
+                      data-bind="if: (BankPortal.member.selectedAccount() && BankPortal.member.selectedAccountTransactions().length > 0)">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Date</th>
+                          <th>Description</th>
+                          <th>Category</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        data-bind="foreach: BankPortal.member.selectedAccountTransactions">
+                        <tr>
+                          <td data-bind="text: ($index() + 1)"></td>
+                          <td data-bind="text: date"></td>
+                          <td data-bind="text: description"></td>
+                          <td data-bind="text: category"></td>
+                          <td data-bind="currency: amount"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -80,6 +123,7 @@
             </div>
           </div>
         </div>
+
         <div id="personal"
           data-bind="visible: BankPortal.isActiveTab('Personal')">
           Personal page
@@ -208,7 +252,7 @@
   <script type="text/javascript" src="javascript/serverstub.js"></script>
   <script type="text/javascript" src="javascript/bankportal.js"></script>
 
-  <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>
+  <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre> -->
 
 
 </body>
