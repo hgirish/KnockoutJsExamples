@@ -1,17 +1,4 @@
 const ServerStub = function () {
-  /* add members here */
-
-  /* the model */
-  // const accounts = [
-  //   {
-  //     summary: {
-  //       name: 'Los Angeles',
-  //       number: 12345,
-  //       accountType: 'Checking',
-  //       accountBalance: 1000.00
-  //     }
-  //   }
-  // ];
 
   const data = {
     personal: {
@@ -165,7 +152,17 @@ const ServerStub = function () {
     return { data: data };
   };
 
+  const updatePersonalInformation = function (personalInformation) {
+    data.personal.firstName = personalInformation.firstName;
+    data.personal.lastName = personalInformation.lastName;
+    data.personal.phoneNumber = personalInformation.contactDetails.phoneNumber;
+    data.personal.emailAddress = personalInformation.contactDetails.emailAddress;
 
+    data.personal.address.street = personalInformation.address.street;
+    data.personal.address.city = personalInformation.address.city;
+    data.personal.address.country = personalInformation.address.country;
+    data.personal.address.postCode = personalInformation.address.postCode;
+  };
 
 
 
@@ -173,6 +170,7 @@ const ServerStub = function () {
     /* add the members that will be exposed publicliy */
 
     getMemberData: getMemberData,
+    updatePersonalInformation: updatePersonalInformation,
   };
 
 

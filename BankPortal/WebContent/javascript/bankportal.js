@@ -23,7 +23,18 @@ const BankPortal = function () {
 
   };
 
+  const personalInformationEditMode = ko.observable(false);
+  const showPersonalInformationEditDone = ko.observable(false);
+
   const activePage = ko.observable('Home');
+
+  const enablePersonalInformationEdit = function () {
+    personalInformationEditMode(true);
+  };
+
+  const cancelPersonalInformationEdit = function () {
+    personalInformationEditMode(false);
+  };
 
   const setActivePage = function (page) {
     console.log(`Setting active page to: ${page}`);
@@ -46,6 +57,16 @@ const BankPortal = function () {
   };
 
   const server = ServerStub();
+
+  const submitPersonalInformation = function () {
+    console.log('Updating personal information on the server: ' + ko.toJSON(member.personal));
+    server.updatePersonalInformation(ko.toJS(member.personal));
+
+    personalInformationEditMode(false);
+    showPersonalInformationEditDone(true);
+  };
+
+
 
   const retrieveData = function () {
     console.log('Retrieving data from server....');
@@ -109,6 +130,11 @@ const BankPortal = function () {
     isActiveTab: isActiveTab,
     setSelectedAccount: setSelectedAccount,
     isSelectedAccount: isSelectedAccount,
+    submitPersonalInformation: submitPersonalInformation,
+    enablePersonalInformationEdit: enablePersonalInformationEdit,
+    cancelPersonalInformationEdit: cancelPersonalInformationEdit,
+    personalInformationEditMode: personalInformationEditMode,
+    showPersonalInformationEditDone: showPersonalInformationEditDone,
   };
 
 
