@@ -29,11 +29,19 @@ const ConfigureKnockout = function () {
     };
   };
 
+  const configureValidationPlugin = function () {
+    ko.validation.init({
+      errorElementClass: 'is-invalid',
+      errorMessageClass: 'invalid-feedback'
+    });
+  };
+
 
 
   const init = function () {
     applyCurrencyBinding();
     createMementoObservable();
+    configureValidationPlugin();
   }();
 
   return {

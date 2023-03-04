@@ -4,17 +4,17 @@ const BankPortal = function () {
   /* the model */
   const member = {
     personal: {
-      firstName: ko.mementoObservable(),
-      lastName: ko.mementoObservable(),
+      firstName: ko.mementoObservable().extend({ required: true }),
+      lastName: ko.mementoObservable().extend({ required: true }),
       address: {
-        street: ko.mementoObservable(),
-        city: ko.mementoObservable(),
-        postCode: ko.mementoObservable(),
-        country: ko.mementoObservable()
+        street: ko.mementoObservable().extend({ required: true }),
+        city: ko.mementoObservable().extend({ required: true }),
+        postCode: ko.mementoObservable().extend({ required: true, minLength: 1, maxLength: 4, number: true }),
+        country: ko.mementoObservable().extend({ required: true }),
       },
       contactDetails: {
-        phoneNumber: ko.mementoObservable(),
-        emailAddress: ko.mementoObservable()
+        phoneNumber: ko.mementoObservable().extend({ required: true, minLength: 4, maxLength: 9, number: true }),
+        emailAddress: ko.mementoObservable().extend({ required: true, email: true }),
       }
     },
     accounts: ko.observableArray(),
@@ -27,6 +27,8 @@ const BankPortal = function () {
   const showPersonalInformationEditDone = ko.observable(false);
   const showPersonalInformationEditCancel = ko.observable(false);
   const activePage = ko.observable('Home');
+
+  let validationErrors;
 
   const enablePersonalInformationEdit = function () {
     personalInformationEditMode(true);
@@ -83,9 +85,14 @@ const BankPortal = function () {
     return activeTab() === tab;
   };
 
+  // eslint-disable-next-line no-undef
   const server = ServerStub();
 
   const submitPersonalInformation = function () {
+    if (validationErrors().length > 0) {
+      console.log('Member model is not valid...');
+      return;
+    }
     commitPersonalInformation();
     console.log('Updating personal information on the server: ' + ko.toJSON(member.personal));
     server.updatePersonalInformation(ko.toJS(member.personal));
@@ -141,6 +148,8 @@ const BankPortal = function () {
   const init = function () {
     /* add code to initialize this module */
     retrieveData();
+
+    validationErrors = ko.validation.group(member, { deep: true });
 
     /* apply ko bindings */
     ko.applyBindings(BankPortal);
