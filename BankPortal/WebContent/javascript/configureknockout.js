@@ -10,8 +10,30 @@ const ConfigureKnockout = function () {
 
   };
 
+
+  const createMementoObservable = function () {
+    ko.mementoObservable = function (initialValue) {
+      const state = ko.observable(initialValue);
+
+      let mementoState = initialValue;
+
+      state.commit = function () {
+        mementoState = state();
+      };
+
+      state.reset = function () {
+        state(mementoState);
+      };
+
+      return state;
+    };
+  };
+
+
+
   const init = function () {
     applyCurrencyBinding();
+    createMementoObservable();
   }();
 
   return {

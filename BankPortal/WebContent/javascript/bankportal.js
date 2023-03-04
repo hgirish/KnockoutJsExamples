@@ -4,17 +4,17 @@ const BankPortal = function () {
   /* the model */
   const member = {
     personal: {
-      firstName: ko.observable(),
-      lastName: ko.observable(),
+      firstName: ko.mementoObservable(),
+      lastName: ko.mementoObservable(),
       address: {
-        street: ko.observable(),
-        city: ko.observable(),
-        postCode: ko.observable(),
-        country: ko.observable()
+        street: ko.mementoObservable(),
+        city: ko.mementoObservable(),
+        postCode: ko.mementoObservable(),
+        country: ko.mementoObservable()
       },
       contactDetails: {
-        phoneNumber: ko.observable(),
-        emailAddress: ko.observable()
+        phoneNumber: ko.mementoObservable(),
+        emailAddress: ko.mementoObservable()
       }
     },
     accounts: ko.observableArray(),
@@ -25,7 +25,7 @@ const BankPortal = function () {
 
   const personalInformationEditMode = ko.observable(false);
   const showPersonalInformationEditDone = ko.observable(false);
-
+  const showPersonalInformationEditCancel = ko.observable(false);
   const activePage = ko.observable('Home');
 
   const enablePersonalInformationEdit = function () {
@@ -33,7 +33,34 @@ const BankPortal = function () {
   };
 
   const cancelPersonalInformationEdit = function () {
+    console.log('Cancelled edit personal information, values reverted...');
+
     personalInformationEditMode(false);
+
+    resetPersonalInformation();
+    showPersonalInformationEditCancel(true);
+  };
+
+  const commitPersonalInformation = function () {
+    member.personal.firstName.commit();
+    member.personal.lastName.commit();
+    member.personal.contactDetails.emailAddress.commit();
+    member.personal.contactDetails.phoneNumber.commit();
+    member.personal.address.street.commit();
+    member.personal.address.city.commit();
+    member.personal.address.postCode.commit();
+    member.personal.address.country.commit();
+  };
+
+  const resetPersonalInformation = function () {
+    member.personal.firstName.reset();
+    member.personal.lastName.reset();
+    member.personal.contactDetails.emailAddress.reset();
+    member.personal.contactDetails.phoneNumber.reset();
+    member.personal.address.street.reset();
+    member.personal.address.city.reset();
+    member.personal.address.postCode.reset();
+    member.personal.address.country.reset();
   };
 
   const setActivePage = function (page) {
@@ -59,6 +86,7 @@ const BankPortal = function () {
   const server = ServerStub();
 
   const submitPersonalInformation = function () {
+    commitPersonalInformation();
     console.log('Updating personal information on the server: ' + ko.toJSON(member.personal));
     server.updatePersonalInformation(ko.toJS(member.personal));
 
@@ -89,6 +117,7 @@ const BankPortal = function () {
     member.personal.address.city(data.personal.address.city);
     member.personal.address.postCode(data.personal.address.postCode);
     member.personal.address.country(data.personal.address.country);
+    commitPersonalInformation();
 
   };
 
@@ -135,6 +164,8 @@ const BankPortal = function () {
     cancelPersonalInformationEdit: cancelPersonalInformationEdit,
     personalInformationEditMode: personalInformationEditMode,
     showPersonalInformationEditDone: showPersonalInformationEditDone,
+    showPersonalInformationEditCancel: showPersonalInformationEditCancel,
+
   };
 
 
