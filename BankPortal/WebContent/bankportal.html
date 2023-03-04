@@ -42,6 +42,11 @@
             <a class="nav-link" href="#"
               data-bind="click: BankPortal.setActiveTab.bind($data, 'Personal'), css: {active: isActiveTab('Personal')}">Personal</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              data-bind="click: BankPortal.setActiveTab.bind($data, 'Transfers'), css: {active: isActiveTab('Transfers')}">Transfers</a>
+          </li>
+
 
         </ul>
         <div id="accounts"
@@ -223,6 +228,25 @@
             </button>
           </form>
         </div>
+
+        <div id="transfers"
+          data-bind="visible: BankPortal.isActiveTab('Transfers')">
+          <div class="row">
+            <div class="col">
+              <div class="card bg-dark">
+                <div class="card-body">
+                  <div class="card-title">
+                    <h4>Transfer funds</h4>
+                  </div>
+                  <div class="card-text">
+                    <p>Transfer funds</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div id="About" data-bind="visible: BankPortal.isActivePage('About')">
