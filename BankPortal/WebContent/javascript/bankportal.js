@@ -138,6 +138,9 @@ const BankPortal = function () {
     return account === member.selectedAccount();
   };
 
+  const transferWizard = Wizard(3);
+
+
 
 
 
@@ -174,7 +177,7 @@ const BankPortal = function () {
     personalInformationEditMode: personalInformationEditMode,
     showPersonalInformationEditDone: showPersonalInformationEditDone,
     showPersonalInformationEditCancel: showPersonalInformationEditCancel,
-
+    transferWizard: transferWizard,
   };
 
 
