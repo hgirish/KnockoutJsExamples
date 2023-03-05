@@ -22,10 +22,18 @@ const BankPortal = function () {
     selectedAccountTransactions: ko.observableArray([]),
 
   };
+  const transfer = {
+    toAccount: ko.observable(),
+    fromAccount: ko.observable(),
+    amount: ko.observable().extend({required:true, number: true}),
+    description: ko.observable().extend({required:true, minLength: 4}),
+  };
 
   const personalInformationEditMode = ko.observable(false);
   const showPersonalInformationEditDone = ko.observable(false);
   const showPersonalInformationEditCancel = ko.observable(false);
+
+
   const activePage = ko.observable('Home');
 
   let validationErrors;
@@ -137,8 +145,29 @@ const BankPortal = function () {
   const isSelectedAccount = function (account) {
     return account === member.selectedAccount();
   };
+  /* global Wizard */
+  const transferWizard = Wizard(3, 'Funds transferred');
 
-  const transferWizard = Wizard(3);
+  const transferFunds = function(){
+    console.log('Transferering amount ' + transfer.amount() + ' from account ' + transfer.fromAccount().summary.number);
+    
+    server.transferFunds(ko.toJS(transfer));
+
+    const accounts = server.getAccounts();
+
+    member.accounts.removeAll();
+
+    accounts.forEach(function(account){
+      member.accounts.push({summary: account.summary,
+        transactions: ko.observableArray(account.transactions)});
+    });
+
+    clearTransferModel();
+  };
+
+  const clearTransferModel = function(){
+    console.log('clearing transfer model');
+  };
 
 
 
@@ -153,6 +182,8 @@ const BankPortal = function () {
     retrieveData();
 
     validationErrors = ko.validation.group(member, { deep: true });
+
+    transferWizard.setCallBack(transferFunds);
 
     /* apply ko bindings */
     ko.applyBindings(BankPortal);
@@ -178,6 +209,7 @@ const BankPortal = function () {
     showPersonalInformationEditDone: showPersonalInformationEditDone,
     showPersonalInformationEditCancel: showPersonalInformationEditCancel,
     transferWizard: transferWizard,
+    transfer: transfer,
   };
 
 

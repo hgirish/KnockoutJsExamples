@@ -3,7 +3,8 @@ const ConfigureKnockout = function () {
     ko.bindingHandlers.currency = {
       update: function (element, valueAccessor) {
         const value = ko.utils.unwrapObservable(valueAccessor()) || 0;
-        const formattedText = '$' + value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+        
+        const formattedText = '$' + Number(value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
         $(element).text(formattedText);
       }
     };

@@ -239,21 +239,85 @@
                     <h4>Transfer funds</h4>
                   </div>
                   <div class="card-text">
+                    <div class="alert alert-success" role="alert"
+                    data-bind="visible: BankPortal.transferWizard.showDoneMessage">
+                      <strong>Done!</strong>
+                      <span data-bind="text: BankPortal.transferWizard.doneMessage"></span>
+                    </div>
                     <div class="row row-centered">
                       <div class="col-md-8 col-centered">
                         <div class="wizard-step"
                           data-bind="if: BankPortal.transferWizard.currentStep() == 1">
-                          <p>First Step</p>
+                          <div class="row row-centered">
+                            <div class="col-md-8 col-centered">
+                              <div class="form-group">
+                                <label class="float-start" for="accountFrom">Account From</label>
+                                <select id="accountFrom" class="form-control"
+                                data-bind="options: BankPortal.member.accounts, optionsText: function(item){return item.summary.type + ' ' + item.summary.number;}, optionsCaption: 'Choose from account... .', value: BankPortal.transfer.fromAccount"></select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-8 col-centered">
+                              <div class="form-group">
+                                <label class="float-start" for="accountTo">Account To</label>
+                                <select id="accountTo" class="form-control"
+                                data-bind="options: BankPortal.member.accounts, optionsText: function(item){return item.summary.type + ' ' + item.summary.number;}, optionsCaption: 'Choose to account... .', value: BankPortal.transfer.toAccount"></select>
+                              </div>
+                            </div>
+
+                          </div>
                         </div>
 
                         <div class="wizard-step"
                           data-bind="if: BankPortal.transferWizard.currentStep() == 2">
-                          <p>Second Step</p>
+                          
+                          <div class="row row-centered">
+                            <div class="col-md-8 col-centered">
+                              <div class="form-group">
+                                <label for="transferAmount" class="float-start">Amount</label>
+                                <input id="transferAmount" class="form-control"
+                                data-bind="value: BankPortal.transfer.amount, validationElement: BankPortal.transfer.amount" />
+                              </div>
+                            </div>
+
+                            <div class="col-md-8 col-centered">
+                              <div class="form-group">
+                                <label for="transferDescription" class="float-start">Description</label>
+                                <input id="transferDescription" class="form-control"
+                                data-bind="value: BankPortal.transfer.description, validationElement: BankPortal.transfer.description" />
+                              </div>
+                            </div>
+
+
+                          </div>
                         </div>
 
                         <div class="wizard-step"
                           data-bind="if: BankPortal.transferWizard.currentStep() == 3">
-                          <p>Third Step</p>
+                          
+                          <div class="row row-centered">
+                            <div class="col-md-8 col-centered">
+                              <strong>From account:</strong>
+                              <span data-bind="text: BankPortal.transfer.fromAccount().summary.type + ' ' + BankPortal.transfer.fromAccount().summary.number"></span>
+                            </div>
+
+                            <div class="col-md-8 col-centered">
+                              <strong>To account:</strong>
+                              <span data-bind="text: BankPortal.transfer.toAccount().summary.type + ' ' + BankPortal.transfer.toAccount().summary.number"></span>
+                            </div>
+
+                            <div class="col-md-8 col-centered">
+                              <strong>Amount:</strong>
+                              <span data-bind="currency: BankPortal.transfer.amount"></span>
+                            </div>
+
+                            <div class="col-md-8 col-centered">
+                              <strong>Description:</strong>
+                              <span data-bind="text: BankPortal.transfer.description"></span>
+                            </div>
+
+
+                          </div>
                         </div>
 
                         <button class="btn btn-success float-start"

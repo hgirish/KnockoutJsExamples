@@ -164,13 +164,65 @@ const ServerStub = function () {
     data.personal.address.postCode = personalInformation.address.postCode;
   };
 
+  /* months for date string */
+  const monthNames = [
+    'January', 'February', 'March',
+    'April', 'May', 'June', 'July',
+    'August', 'September', 'October',
+    'November', 'December'
+  ];
 
+  const getTodaysDate = function(){
+    const date = new Date();
+    let day = date.getDate();
+    if (day < 10){
+      day  = '0' + day;
+    }
+    const monthIndex = date.getMonth();
+    return day + ' ' + monthNames[monthIndex];
+  };
+  const transferFunds = function(transferModel){
+    const accounts= data.accounts;
+    transferModel.amount = +transferModel.amount;
+
+    accounts.forEach(function(account){
+      if (account.summary.number == transferModel.toAccount.summary.number){
+        account.summary.balance = account.summary.balance + transferModel.amount;
+        account.transactions.push({
+          date: getTodaysDate(),
+          description: transferModel.description,
+          category: 'Credit',
+          amount: transferModel.amount,
+        });
+      }
+
+      if (account.summary.number == transferModel.fromAccount.summary.number){
+        account.summary.balance = account.summary.balance - transferModel.amount;
+
+        account.transactions.push({
+          date: getTodaysDate(),
+          description: transferModel.description,
+          category: 'Debit',
+          amount: transferModel.amount,
+        });
+
+
+      }
+    }
+    );
+  };
+
+  const getAccounts = function(){
+    return data.accounts;
+  };
 
   return {
     /* add the members that will be exposed publicliy */
 
     getMemberData: getMemberData,
     updatePersonalInformation: updatePersonalInformation,
+    transferFunds: transferFunds,
+    getAccounts: getAccounts,
   };
 
 
