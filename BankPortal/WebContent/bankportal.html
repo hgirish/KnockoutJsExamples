@@ -240,9 +240,10 @@
                   </div>
                   <div class="card-text">
                     <div class="alert alert-success" role="alert"
-                    data-bind="visible: BankPortal.transferWizard.showDoneMessage">
+                      data-bind="visible: BankPortal.transferWizard.showDoneMessage">
                       <strong>Done!</strong>
-                      <span data-bind="text: BankPortal.transferWizard.doneMessage"></span>
+                      <span
+                        data-bind="text: BankPortal.transferWizard.doneMessage"></span>
                     </div>
                     <div class="row row-centered">
                       <div class="col-md-8 col-centered">
@@ -251,17 +252,19 @@
                           <div class="row row-centered">
                             <div class="col-md-8 col-centered">
                               <div class="form-group">
-                                <label class="float-start" for="accountFrom">Account From</label>
+                                <label class="float-start"
+                                  for="accountFrom">Account From</label>
                                 <select id="accountFrom" class="form-control"
-                                data-bind="options: BankPortal.member.accounts, optionsText: function(item){return item.summary.type + ' ' + item.summary.number;}, optionsCaption: 'Choose from account... .', value: BankPortal.transfer.fromAccount"></select>
+                                  data-bind="options: BankPortal.member.accounts, optionsText: function(item){return item.summary.type + ' ' + item.summary.number;}, optionsCaption: 'Choose from account... .', value: BankPortal.transfer.fromAccount"></select>
                               </div>
                             </div>
 
                             <div class="col-md-8 col-centered">
                               <div class="form-group">
-                                <label class="float-start" for="accountTo">Account To</label>
+                                <label class="float-start"
+                                  for="accountTo">Account To</label>
                                 <select id="accountTo" class="form-control"
-                                data-bind="options: BankPortal.member.accounts, optionsText: function(item){return item.summary.type + ' ' + item.summary.number;}, optionsCaption: 'Choose to account... .', value: BankPortal.transfer.toAccount"></select>
+                                  data-bind="options: BankPortal.member.accounts, optionsText: function(item){return item.summary.type + ' ' + item.summary.number;}, optionsCaption: 'Choose to account... .', value: BankPortal.transfer.toAccount"></select>
                               </div>
                             </div>
 
@@ -270,21 +273,24 @@
 
                         <div class="wizard-step"
                           data-bind="if: BankPortal.transferWizard.currentStep() == 2">
-                          
+
                           <div class="row row-centered">
                             <div class="col-md-8 col-centered">
                               <div class="form-group">
-                                <label for="transferAmount" class="float-start">Amount</label>
+                                <label for="transferAmount"
+                                  class="float-start">Amount</label>
                                 <input id="transferAmount" class="form-control"
-                                data-bind="value: BankPortal.transfer.amount, validationElement: BankPortal.transfer.amount" />
+                                  data-bind="value: BankPortal.transfer.amount, validationElement: BankPortal.transfer.amount" />
                               </div>
                             </div>
 
                             <div class="col-md-8 col-centered">
                               <div class="form-group">
-                                <label for="transferDescription" class="float-start">Description</label>
-                                <input id="transferDescription" class="form-control"
-                                data-bind="value: BankPortal.transfer.description, validationElement: BankPortal.transfer.description" />
+                                <label for="transferDescription"
+                                  class="float-start">Description</label>
+                                <input id="transferDescription"
+                                  class="form-control"
+                                  data-bind="value: BankPortal.transfer.description, validationElement: BankPortal.transfer.description" />
                               </div>
                             </div>
 
@@ -294,26 +300,30 @@
 
                         <div class="wizard-step"
                           data-bind="if: BankPortal.transferWizard.currentStep() == 3">
-                          
+
                           <div class="row row-centered">
                             <div class="col-md-8 col-centered">
                               <strong>From account:</strong>
-                              <span data-bind="text: BankPortal.transfer.fromAccount().summary.type + ' ' + BankPortal.transfer.fromAccount().summary.number"></span>
+                              <span
+                                data-bind="text: BankPortal.transfer.fromAccount().summary.type + ' ' + BankPortal.transfer.fromAccount().summary.number"></span>
                             </div>
 
                             <div class="col-md-8 col-centered">
                               <strong>To account:</strong>
-                              <span data-bind="text: BankPortal.transfer.toAccount().summary.type + ' ' + BankPortal.transfer.toAccount().summary.number"></span>
+                              <span
+                                data-bind="text: BankPortal.transfer.toAccount().summary.type + ' ' + BankPortal.transfer.toAccount().summary.number"></span>
                             </div>
 
                             <div class="col-md-8 col-centered">
                               <strong>Amount:</strong>
-                              <span data-bind="currency: BankPortal.transfer.amount"></span>
+                              <span
+                                data-bind="currency: BankPortal.transfer.amount"></span>
                             </div>
 
                             <div class="col-md-8 col-centered">
                               <strong>Description:</strong>
-                              <span data-bind="text: BankPortal.transfer.description"></span>
+                              <span
+                                data-bind="text: BankPortal.transfer.description"></span>
                             </div>
 
 
@@ -470,6 +480,7 @@
   <script type="text/javascript"
     src="../../lib/bootstrap/js/bootstrap.bundle.js"></script>
   <script type="text/javascript" src="javascript/configureknockout.js"></script>
+  <script type="text/javascript" src="javascript/jwt.js"></script>
   <script type="text/javascript" src="javascript/serverstub.js"></script>
   <script type="text/javascript" src="javascript/wizard.js"></script>
   <script type="text/javascript" src="javascript/bankportal.js"></script>
