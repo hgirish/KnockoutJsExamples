@@ -4,6 +4,12 @@
 // eslint-disable-next-line no-unused-vars
 const ServerStub = function () {
 
+  const users = [
+    {userName: 'john.citizen', password: 'john123', firstName: 'John', lastName: 'Citizen'},
+    {userName: 'mark.person', password: 'mark123', firstName: 'Mark', lastName: 'Person'},
+  
+  ];
+  const tokenHeader = {typ: 'JWT', alg: 'HS256'};
   const hmacKey = 'hmacKey';
 
   const memberData = [
@@ -161,6 +167,32 @@ const ServerStub = function () {
 
 
 
+  const login = function(userName, password){
+    console.log('Logging in using: ' + userName);
+    let token = false;
+
+    for (let i = 0; i < users.length; i++ ){
+      if (users[i].userName == userName && users[i].password == password){
+        token = constructToken(users[i]);
+        break;
+      }
+    }
+
+    return token;
+  };
+
+  const constructToken = function(user) {
+    const date = new Date();
+    const payload = {
+      iss:'mybank', exp: date.getTime(), sub: 'authentication token',
+      firstName: user.firstName, lastName: user.lastName,
+      userName: user.userName,
+    };
+    const token = new jwt.WebToken(JSON.stringify(payload), JSON.stringify(tokenHeader));
+    const signed = token.serialize(hmacKey);
+    return signed;
+  };
+
 
   const getMemberData = function (clientToken) {
     const userName = validateToken(clientToken);
@@ -173,6 +205,7 @@ const ServerStub = function () {
   };
 
   const validateToken = function (clientToken) {
+    console.log('clientToken: ' + clientToken);
     const token = jwt.WebTokenParser.parse(clientToken);
     if (token.verify(hmacKey)) {
       console.log(jwt.base64urldecode(token.payloadSegment));
@@ -284,6 +317,7 @@ const ServerStub = function () {
     updatePersonalInformation: updatePersonalInformation,
     transferFunds: transferFunds,
     getAccounts: getAccounts,
+    login: login,
   };
 
 

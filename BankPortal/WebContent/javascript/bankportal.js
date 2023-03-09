@@ -1,3 +1,6 @@
+/// <reference path="authenticator.js" />
+/// <reference path="serverstub.js" />
+
 const BankPortal = function () {
   /* add members here */
 
@@ -95,6 +98,8 @@ const BankPortal = function () {
 
   // eslint-disable-next-line no-undef
   const server = ServerStub();
+  // eslint-disable-next-line no-undef
+  const authenticator = Authenticator(server);
 
   const submitPersonalInformation = function () {
     if (validationErrors().length > 0) {
@@ -103,7 +108,7 @@ const BankPortal = function () {
     }
     commitPersonalInformation();
     console.log('Updating personal information on the server: ' + ko.toJSON(member.personal));
-    server.updatePersonalInformation(ko.toJS(member.personal));
+    server.updatePersonalInformation(ko.toJS(member.personal), authenticator.getAuthenticationToken());
 
     personalInformationEditMode(false);
     showPersonalInformationEditDone(true);
@@ -113,7 +118,7 @@ const BankPortal = function () {
 
   const retrieveData = function () {
     console.log('Retrieving data from server....');
-    const data = server.getMemberData().data;
+    const data = server.getMemberData(authenticator.getAuthenticationToken());
     console.log('Data retrieved from server: ' + ko.toJSON(data));
 
     data.accounts.forEach(function (account) {
@@ -151,9 +156,9 @@ const BankPortal = function () {
   const transferFunds = function(){
     console.log('Transferering amount ' + transfer.amount() + ' from account ' + transfer.fromAccount().summary.number);
     
-    server.transferFunds(ko.toJS(transfer));
+    server.transferFunds(ko.toJS(transfer), authenticator.getAuthenticationToken());
 
-    const accounts = server.getAccounts();
+    const accounts = server.getAccounts(authenticator.getAuthenticationToken());
 
     member.accounts.removeAll();
 
@@ -173,20 +178,27 @@ const BankPortal = function () {
 
 
 
-
+  const postAuthenticationInit = function(){
+    if  (authenticator.isAuthenticated()){
+      retrieveData();
+      validationErrors = ko.validation.group(member, {deep:true});
+    }
+  };
 
 
   /* method to initialize the module */
   const init = function () {
-    /* add code to initialize this module */
-    retrieveData();
+    
 
-    validationErrors = ko.validation.group(member, { deep: true });
 
     transferWizard.setCallBack(transferFunds);
 
+    authenticator.setCallBack(postAuthenticationInit);
+
     /* apply ko bindings */
     ko.applyBindings(BankPortal);
+
+    postAuthenticationInit();
   };
 
   /* execute the init function when the DOM is ready */
@@ -210,6 +222,7 @@ const BankPortal = function () {
     showPersonalInformationEditCancel: showPersonalInformationEditCancel,
     transferWizard: transferWizard,
     transfer: transfer,
+    authenticator: authenticator,
   };
 
 

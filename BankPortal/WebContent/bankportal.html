@@ -14,7 +14,26 @@
 </head>
 
 <body class="d-flex h-100  text-bg-dark">
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <div class=" container cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"
+  data-bind="ifnot: BankPortal.authenticator.isAuthenticated">
+  <form  class="form-login" data-bind="submit: BankPortal.authenticator.login">
+<h2 class="form-login-heading">Please sign in</h2>
+<label for="inputUserName" class="visually-hidden">User Name</label>
+<input type="text" id="inputUserName" class="form-control" placeholder="User name" 
+data-bind="value: BankPortal.authenticator.credentials.userName, validationElement: BankPortal.authenticator.credentials.userName"
+/>
+
+<label for="inputPassword" class="visually-hidden">Password</label>
+<input type="text" id="inputPassword" class="form-control" placeholder="Password" 
+data-bind="value: BankPortal.authenticator.credentials.password, validationElement: BankPortal.authenticator.credentials.password"
+/>
+
+<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+</div>
+  <div class=" container cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"
+  data-bind="if: BankPortal.authenticator.isAuthenticated"
+  >
     <header class="mx-2">
       <div>
         <h3 class="float-md-start mb-0">Bank Portal</h3>
@@ -480,6 +499,7 @@
   <script type="text/javascript"
     src="../../lib/bootstrap/js/bootstrap.bundle.js"></script>
   <script type="text/javascript" src="javascript/configureknockout.js"></script>
+  <script type="text/javascript" src="javascript/authenticator.js"></script>
   <script type="text/javascript" src="javascript/jwt.js"></script>
   <script type="text/javascript" src="javascript/serverstub.js"></script>
   <script type="text/javascript" src="javascript/wizard.js"></script>
