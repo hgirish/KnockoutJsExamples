@@ -13,7 +13,7 @@
   <link href="css/carousel.css" rel="stylesheet">
 </head>
 
-<body class="d-flex h-100  text-bg-dark">
+<body class="text-bg-dark">
   <div class=" container cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"
   data-bind="ifnot: BankPortal.authenticator.isAuthenticated">
   <form  class="form-login" data-bind="submit: BankPortal.authenticator.login">
@@ -37,22 +37,39 @@ data-bind="visible: BankPortal.authenticator.showAuthenticationFailed">
 </div>
   </form>
 </div>
-  <div class=" container cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"
+  <div class="container"
   data-bind="if: BankPortal.authenticator.isAuthenticated"
   >
-    <header class="mx-2">
-      <div>
-        <h3 class="float-md-start mb-0">Bank Portal</h3>
-        <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link fw-bold py-1 px-0" aria-current="page"
-            data-bind="click: BankPortal.setActivePage.bind($data, 'Home'), css: {active: BankPortal.isActivePage('Home')}"
-            href="#">Home</a>
-          <a class="nav-link fw-bold py-1 px-0" href="#"
-            data-bind="click: BankPortal.setActivePage.bind($data,'About'), css: {active: BankPortal.isActivePage('About')}">About</a>
-          <a class="nav-link fw-bold py-1 px-0" href="#"
-            data-bind="click: BankPortal.setActivePage.bind($data, 'Contact'), css: {active: BankPortal.isActivePage('Contact')}">Contact</a>
-        </nav>
-      </div>
+   
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Bank Portal</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                data-bind="click: BankPortal.setActivePage.bind($data, 'Home'), css: {active: BankPortal.isActivePage('Home')}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"data-bind="click: BankPortal.setActivePage.bind($data,'About'), css: {active: BankPortal.isActivePage('About')}">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bind="click: BankPortal.setActivePage.bind($data, 'Contact'), css: {active: BankPortal.isActivePage('Contact')}">Contact</a>
+              </li>
+            </ul>
+            <span class="d-flex"
+                data-bind="text: BankPortal.authenticator.loggedInUser"
+                ></span>
+          
+          
+          </div>
+        </div>
+      </nav>
     </header>
 
     <main class="px-3 pt-5" data-bs-theme="dark">
@@ -74,6 +91,7 @@ data-bind="visible: BankPortal.authenticator.showAuthenticationFailed">
 
 
         </ul>
+        
         <div id="accounts"
           data-bind="visible: BankPortal.isActiveTab('Accounts')">
           <div class="row">

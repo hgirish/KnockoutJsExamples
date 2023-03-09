@@ -1,4 +1,4 @@
-
+/*global jwt */
 
 // eslint-disable-next-line no-unused-vars
 const Authenticator = function(serverModule){
@@ -28,6 +28,13 @@ const Authenticator = function(serverModule){
     return authenticationToken() != false;
   });
 
+  const loggedInUser = ko.pureComputed(function(){
+    const token = authenticationToken();
+    const split = token.split('.');
+    const userPayload = JSON.parse(jwt.base64urldecode(split[1]));
+    return userPayload.userName;
+  });
+  
   const login = function(){
     if  (credentials.errors().length > 0){
       console.log('Credentials model is invalid');
@@ -68,5 +75,6 @@ const Authenticator = function(serverModule){
     setCallBack: setCallBack,
     login: login,
     showAuthenticationFailed: showAuthenticationFailed,
+    loggedInUser: loggedInUser,
   };
 };
