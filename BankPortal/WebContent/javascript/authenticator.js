@@ -1,4 +1,4 @@
-/*global jwt */
+
 
 // eslint-disable-next-line no-unused-vars
 const Authenticator = function(serverModule){
@@ -13,8 +13,8 @@ const Authenticator = function(serverModule){
 
   /* model for user credentials */
   const credentials = {
-    userName: ko.observable(),
-    password: ko.observable(),
+    userName: ko.observable().extend({required:true}),
+    password: ko.observable().extend({required:true}),
   };
 
   /* return the authentication token */
@@ -28,6 +28,11 @@ const Authenticator = function(serverModule){
   });
 
   const login = function(){
+    if  (credentials.errors().length > 0){
+      console.log('Credentials model is invalid');
+      credentials.errors.showAllMessages();
+      return;
+    }
     const token  = server.login(credentials.userName(), credentials.password());
     authenticationToken(token);
     console.log('login ' + authenticationToken());
@@ -47,6 +52,7 @@ const Authenticator = function(serverModule){
     } else {
       authenticationToken(token);
     }
+    credentials.errors = ko.validation.group(credentials);
   }();
  
 

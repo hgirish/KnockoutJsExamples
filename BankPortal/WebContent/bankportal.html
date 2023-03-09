@@ -18,14 +18,15 @@
   data-bind="ifnot: BankPortal.authenticator.isAuthenticated">
   <form  class="form-login" data-bind="submit: BankPortal.authenticator.login">
 <h2 class="form-login-heading">Please sign in</h2>
+
 <label for="inputUserName" class="visually-hidden">User Name</label>
 <input type="text" id="inputUserName" class="form-control" placeholder="User name" 
-data-bind="value: BankPortal.authenticator.credentials.userName, validationElement: BankPortal.authenticator.credentials.userName"
+data-bind="value: BankPortal.authenticator.credentials.userName,validationOptions: {insertMessages: false}, validationElement: BankPortal.authenticator.credentials.userName"
 />
 
 <label for="inputPassword" class="visually-hidden">Password</label>
 <input type="text" id="inputPassword" class="form-control" placeholder="Password" 
-data-bind="value: BankPortal.authenticator.credentials.password, validationElement: BankPortal.authenticator.credentials.password"
+data-bind="value: BankPortal.authenticator.credentials.password,validationOptions: {insertMessages: false}, validationElement: BankPortal.authenticator.credentials.password"
 />
 
 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
