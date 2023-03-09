@@ -162,6 +162,14 @@ const ServerStub = function () {
         ]
 
       }
+    },{
+      userName: 'mark.person',
+      data: {
+        personal: {
+
+        },
+        accounts:[]
+      }
     }
   ];
 
@@ -181,6 +189,10 @@ const ServerStub = function () {
     return token;
   };
 
+  const logout = function(clientToken){
+    console.log('loggingout', clientToken);
+    // logout
+  };
   const constructToken = function(user) {
     const date = new Date();
     const payload = {
@@ -318,6 +330,7 @@ const ServerStub = function () {
     transferFunds: transferFunds,
     getAccounts: getAccounts,
     login: login,
+    logout: logout,
   };
 
 

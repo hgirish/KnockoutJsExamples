@@ -34,7 +34,7 @@ const Authenticator = function(serverModule){
     const userPayload = JSON.parse(jwt.base64urldecode(split[1]));
     return userPayload.userName;
   });
-  
+
   const login = function(){
     if  (credentials.errors().length > 0){
       console.log('Credentials model is invalid');
@@ -51,12 +51,18 @@ const Authenticator = function(serverModule){
     loginCallBack();
   };
 
+  const logout = function(){
+    server.logout(authenticationToken());
+    sessionStorage.clear();
+    document.location.reload(true);
+  };
   /* method sets the call back */
   const setCallBack = function(callBack){
     loginCallBack = callBack;
   };
 
   /* initialize the module */
+  // eslint-disable-next-line no-unused-vars
   const init = function(){
     const token = sessionStorage.getItem('token');
     if (token == null){
@@ -76,5 +82,6 @@ const Authenticator = function(serverModule){
     login: login,
     showAuthenticationFailed: showAuthenticationFailed,
     loggedInUser: loggedInUser,
+    logout: logout,
   };
 };

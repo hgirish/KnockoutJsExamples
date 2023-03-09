@@ -62,10 +62,19 @@ data-bind="visible: BankPortal.authenticator.showAuthenticationFailed">
                 <a class="nav-link" data-bind="click: BankPortal.setActivePage.bind($data, 'Contact'), css: {active: BankPortal.isActivePage('Contact')}">Contact</a>
               </li>
             </ul>
-            <span class="d-flex"
-                data-bind="text: BankPortal.authenticator.loggedInUser"
-                ></span>
-          
+            
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a href="#" class=" nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <span data-bind="text: BankPortal.authenticator.loggedInUser"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <a href="#" class="nav-link bg-dark" data-bind="click: BankPortal.authenticator.logout">Log out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
           
           </div>
         </div>
