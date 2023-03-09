@@ -10,6 +10,7 @@ const Authenticator = function(serverModule){
 
   /* call back on successful login */
   let loginCallBack;
+  const showAuthenticationFailed = ko.observable();
 
   /* model for user credentials */
   const credentials = {
@@ -34,6 +35,10 @@ const Authenticator = function(serverModule){
       return;
     }
     const token  = server.login(credentials.userName(), credentials.password());
+    if (token == false){
+      showAuthenticationFailed(true);
+      return;
+    }
     authenticationToken(token);
     console.log('login ' + authenticationToken());
     loginCallBack();
@@ -62,5 +67,6 @@ const Authenticator = function(serverModule){
     getAuthenticationToken: getAuthenticationToken,
     setCallBack: setCallBack,
     login: login,
+    showAuthenticationFailed: showAuthenticationFailed,
   };
 };
