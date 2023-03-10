@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/hgirish/KnockoutJsExamples/issues"
   },
-  "homepage": "https://github.com/hgirish/KnockoutJsExamples#readme"
+  "homepage": "https://github.com/hgirish/KnockoutJsExamples#readme",
+  "dependencies": {
+    "restify": "^11.1.0"
+  }
 }

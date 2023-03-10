@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" class="h-100" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Knockout : Customer Banking Portal</title>
+
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css">
+  <!-- Custom styles for this template -->
+  <link href="css/styles.css" rel="stylesheet">
+
+</head>
+
+<body class="text-bg-dark">
+  <div class="container">
+    <div class="card bg-dark">
+      <div class="card-title">
+        <h4>Products</h4>
+      </div>
+      <div class="card-text">
+        Products Grid
+
+        <div>
+          The name is <span data-bind="text: name"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="text/javascript" src="/lib/jquery/jquery.js"></script>
+  <script type="text/javascript"
+    src="/lib/knockout/knockout-latest.js"></script>
+
+  <script type="text/javascript"
+    src="/lib/knockout-validation/knockout.validation.js"></script>
+  <script type="text/javascript"
+    src="/lib/bootstrap/js/bootstrap.bundle.js"></script>
+  <script type="text/javascript" src="javascript/configureknockout.js"></script>
+
+  <script type="module" src=".\javascript\productsgrid.js"></script>
+
+  <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre> -->
+
+
+</body>
+
+</html>
