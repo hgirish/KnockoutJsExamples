@@ -46,6 +46,10 @@ const ProductsGrid = function () {
     products.push(new productModel(item, displayMode.edit));
   };
 
+  const editProduct = function (product) {
+    product.displayMode(displayMode.edit);
+  };
+
   const saveProduct = function (product) {
     client.addProduct(product, saveProductCallaback);
   };
@@ -54,6 +58,15 @@ const ProductsGrid = function () {
     product.data.id(id);
     product.displayMode(displayMode.view);
     console.log('Product saved with id ' + product.data.id());
+  };
+
+  const updateProduct = function (product) {
+    client.updateProduct(product, updateProductCallback);
+  };
+
+  const updateProductCallback = function (product) {
+    console.log('Product updated with id ' + product.data.id());
+    product.displayMode(displayMode.view);
   };
 
   const init = function () {
@@ -73,6 +86,8 @@ const ProductsGrid = function () {
     displayMode: displayMode,
     addProduct: addProduct,
     saveProduct: saveProduct,
+    editProduct: editProduct,
+    updateProduct: updateProduct,
   };
 
 }();

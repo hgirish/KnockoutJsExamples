@@ -40,7 +40,11 @@
               <td data-bind="text: data.description"></td>
               <td data-bind="currency: data.price"></td>
               <td>
-                <a href="#" class="btn btn-danger btn-sm" title="Delete Product"
+                <a href="#" class="btn text-white" title="Edit Product"
+                  data-bind="click: ProductsGrid.editProduct">
+                  <i class="gg-pen"></i>
+                </a>
+                <a href="#" class="btn text-white btn-sm" title="Delete Product"
                   data-bind="click: ProductsGrid.deleteProduct">
                   <i class="gg-trash"></i>
                 </a>
@@ -61,8 +65,10 @@
                   data-bind="value: data.price" />
               </td>
               <td>
+                <a href class="btn text-white"
+                  data-bind="visible: data.id() != null, click: ProductsGrid.updateProduct">Update</a>
                 <a href="#" class="btn btn-success btn-sm me-1"
-                  data-bind="click: ProductsGrid.saveProduct">Save</a>
+                  data-bind="visible: data.id() == null, click: ProductsGrid.saveProduct">Save</a>
 
                 <a href="#" class="btn btn-danger btn-sm"
                   data-bind="click: ProductsGrid.deleteProduct">Delete</a>

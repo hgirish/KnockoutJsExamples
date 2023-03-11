@@ -37,9 +37,25 @@ const ProductsClient = function (url) {
     });
   };
 
+  const updateProduct = function (product, callback) {
+    const plainProduct = JSON.stringify(ko.toJS(product.data));
+    console.log('Updating product ' + plainProduct);
+    $.ajax({
+      url: baseUrl + '/products',
+      type: 'PUT',
+      data: plainProduct,
+      contentType: 'application/json',
+
+    }).done(function (result) {
+      console.log(result);
+      callback(product);
+    });
+  };
+
   return {
     getProducts: getProducts,
     deleteProduct: deleteProduct,
     addProduct: addProduct,
+    updateProduct: updateProduct,
   };
 };
