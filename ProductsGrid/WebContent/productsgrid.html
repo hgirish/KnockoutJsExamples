@@ -8,6 +8,9 @@
   <title>Knockout : Customer Banking Portal</title>
 
   <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
+
+  <link href='https://css.gg/css' rel='stylesheet'>
+
   <!-- Custom styles for this template -->
   <link href="css/styles.css" rel="stylesheet">
 
@@ -31,19 +34,45 @@
             </tr>
           </thead>
           <tbody data-bind="foreach: ProductsGrid.products">
-            <tr>
+            <tr data-bind="if: displayMode() === ProductsGrid.displayMode.view">
               <td data-bind="text: data.id"></td>
               <td data-bind="text: data.name"></td>
               <td data-bind="text: data.description"></td>
               <td data-bind="currency: data.price"></td>
               <td>
-                <a href="#"
+                <a href="#" class="btn btn-danger btn-sm" title="Delete Product"
+                  data-bind="click: ProductsGrid.deleteProduct">
+                  <i class="gg-trash"></i>
+                </a>
+              </td>
+            </tr>
+            <tr data-bind="if: displayMode() === ProductsGrid.displayMode.edit">
+              <td data-bind="text: data.id"></td>
+              <td>
+                <input type="text" class="form-control"
+                  data-bind="value: data.name" />
+              </td>
+              <td>
+                <input type="text" class="form-control"
+                  data-bind="value: data.description" />
+              </td>
+              <td>
+                <input type="text" class="form-control"
+                  data-bind="value: data.price" />
+              </td>
+              <td>
+                <a href="#" class="btn btn-success btn-sm me-1"
+                  data-bind="click: ProductsGrid.saveProduct">Save</a>
+
+                <a href="#" class="btn btn-danger btn-sm"
                   data-bind="click: ProductsGrid.deleteProduct">Delete</a>
               </td>
             </tr>
           </tbody>
         </table>
-
+        <a href="#" class="btn btn-primary btn-sm"
+          data-bind="click: ProductsGrid.addProduct">
+          <i class="gg-add"></i> Add a Product</a>
 
       </div>
     </div>

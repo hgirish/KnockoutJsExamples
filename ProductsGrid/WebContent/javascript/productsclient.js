@@ -24,8 +24,22 @@ const ProductsClient = function (url) {
     });
   };
 
+  const addProduct = function (product, callback) {
+    const plainProduct = JSON.stringify(ko.toJS(product.data));
+    console.log('Saving product ' + plainProduct);
+    $.ajax({
+      url: baseUrl + '/products',
+      type: 'POST',
+      data: plainProduct,
+      contentType: 'application/json'
+    }).done(function (id) {
+      callback(product, id);
+    });
+  };
+
   return {
     getProducts: getProducts,
     deleteProduct: deleteProduct,
+    addProduct: addProduct,
   };
 };
