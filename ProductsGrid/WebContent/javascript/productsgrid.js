@@ -23,6 +23,15 @@ const ProductsGrid = function () {
     });
   };
 
+  const deleteProduct = function (product) {
+    client.deleteProduct(product, deleteProductCallback);
+  };
+
+  const deleteProductCallback = function (product) {
+    products.remove(product);
+    console.log('Product with id ' + product.data.id() + ' deleted');
+  };
+
   const init = function () {
 
     retrieveProducts();
@@ -36,6 +45,7 @@ const ProductsGrid = function () {
     productModel: productModel,
     products: products,
     retrieveProducts: retrieveProducts,
+    deleteProduct: deleteProduct,
   };
 
 }();

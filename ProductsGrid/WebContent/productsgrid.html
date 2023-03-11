@@ -27,6 +27,7 @@
               <th>Name</th>
               <th>Description</th>
               <th>Price</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: ProductsGrid.products">
@@ -35,6 +36,10 @@
               <td data-bind="text: data.name"></td>
               <td data-bind="text: data.description"></td>
               <td data-bind="currency: data.price"></td>
+              <td>
+                <a href="#"
+                  data-bind="click: ProductsGrid.deleteProduct">Delete</a>
+              </td>
             </tr>
           </tbody>
         </table>

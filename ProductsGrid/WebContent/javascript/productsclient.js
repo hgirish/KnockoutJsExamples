@@ -6,14 +6,26 @@ const ProductsClient = function (url) {
     $.ajax({
       url: baseUrl + '/products',
       type: 'GET',
-      success: function (result) {
-        console.log('Products retrieved: ' + JSON.stringify(result));
-        callback(result);
-      }
+
+    }).done(function (result) {
+      console.log('Products retrieved: ' + JSON.stringify(result));
+      callback(result);
+    });
+  };
+
+  const deleteProduct = function (product, callback) {
+    console.log('Deleting product with id: ' + product.data.id());
+    $.ajax({
+      url: baseUrl + '/products/' + product.data.id(),
+      type: 'DELETE',
+
+    }).done(function () {
+      callback(product);
     });
   };
 
   return {
-    getProducts: getProducts
+    getProducts: getProducts,
+    deleteProduct: deleteProduct,
   };
 };
