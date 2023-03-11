@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <title>Knockout : Customer Banking Portal</title>
 
-  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
   <!-- Custom styles for this template -->
   <link href="css/styles.css" rel="stylesheet">
 
@@ -20,27 +20,42 @@
         <h4>Products</h4>
       </div>
       <div class="card-text">
-        Products Grid
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: ProductsGrid.products">
+            <tr>
+              <td data-bind="text: data.id"></td>
+              <td data-bind="text: data.name"></td>
+              <td data-bind="text: data.description"></td>
+              <td data-bind="currency: data.price"></td>
+            </tr>
+          </tbody>
+        </table>
 
-        <div>
-          The name is <span data-bind="text: name"></span>
-        </div>
+
       </div>
     </div>
   </div>
 
 
-  <script type="text/javascript" src="/lib/jquery/jquery.js"></script>
+  <script type="text/javascript" src="../../lib/jquery/jquery.js"></script>
   <script type="text/javascript"
-    src="/lib/knockout/knockout-latest.js"></script>
+    src="../../lib/knockout/knockout-latest.js"></script>
 
   <script type="text/javascript"
-    src="/lib/knockout-validation/knockout.validation.js"></script>
+    src="../../lib/knockout-validation/knockout.validation.js"></script>
   <script type="text/javascript"
-    src="/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    src="../../lib/bootstrap/js/bootstrap.bundle.js"></script>
   <script type="text/javascript" src="javascript/configureknockout.js"></script>
-
-  <script type="module" src=".\javascript\productsgrid.js"></script>
+  <script type="text/javascript" src="javascript\productsclient.js"></script>
+  <script type="text/javascript" src="javascript\productsgrid.js"></script>
 
   <!-- <pre data-bind="text: ko.toJSON($root, null, 2)"></pre> -->
 
